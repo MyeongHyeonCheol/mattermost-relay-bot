@@ -1,0 +1,39 @@
+name: mattermost-relay
+# 워크플로 등록 트리거용 (GitHub가 첫 push 때 등록을 건너뛰는 경우 대비)
+on:
+  schedule:
+    - cron: "*/5 * * * *"   # 약 5분마다(지연 가능)
+  workflow_dispatch: {}      # 수동 실행 버튼
+
+permissions:
+  contents: write            # state.json 커밋용
+
+concurrency:
+  group: relay
+  cancel-in-progress: false
+
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Run relay
+        env:
+          MM_LOGIN_ID: ${{ secrets.MM_LOGIN_ID }}
+          MM_PASSWORD: ${{ secrets.MM_PASSWORD }}
+          MM_DEST_CHANNEL_ID: ${{ secrets.MM_DEST_CHANNEL_ID }}
+        run: python -m bot.main
+      - name: Commit state if changed
+        run: |
+          git add state.json
+          # 새로 생성된 state.json(미추적)도 감지하려면 staged 비교를 써야 한다.
+          if ! git diff --cached --quiet -- state.json; then
+            git config user.name "github-actions"
+            git config user.email "actions@github.com"
+            git commit -m "chore: update relay state [skip ci]"
+            git push
+          fi

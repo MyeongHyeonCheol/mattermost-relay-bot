@@ -1,0 +1,28 @@
+# 자격증명/비밀 — 공개 저장소에 절대 올리지 않음
+.env
+.env.*
+!.env.example
+secrets.*
+*.secret
+credentials.*
+config.local.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+
+# OS/에디터
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# 로그/임시
+*.log
+tmp/
+/.superpowers/

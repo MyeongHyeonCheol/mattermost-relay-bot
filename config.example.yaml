@@ -1,0 +1,12 @@
+# 복사해서 config.yaml 로 사용하세요. 민감정보(ID/PW)는 넣지 않습니다.
+server_url: https://meeting.ssafy.com
+team: s15p30b2
+dry_run: true                 # true면 전달하지 않고 로그만 출력
+source_channels:
+  - "모의 소스"               # 테스트용. 운영: "[자율 2반] 팀장", "<팀장채널>"
+destination_channel: "모의 대상"  # 테스트용. destination_channel_id가 없으면 이 표시 이름으로 채널을 찾음
+# 선택: 환경변수 MM_DEST_CHANNEL_ID(.env/Secrets)에 채널 ID를 넣으면 이름 조회 없이 그 채널로 전달(그룹 DM 등)
+allowed_senders:
+  - audguscjf                 # 본인(테스트/운영 공통)
+  - 명현철                    # 테스트용
+poll_overlap_seconds: 5

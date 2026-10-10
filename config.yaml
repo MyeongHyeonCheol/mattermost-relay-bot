@@ -1,0 +1,15 @@
+# 운영 설정 (민감정보 없음 — ID/PW는 .env / GitHub Secrets로만 주입)
+server_url: https://meeting.ssafy.com
+team: s15p30b2
+dry_run: false                # 운영 라이브 전달
+source_channels:
+  - "[자율 2반] 팀장"
+  - "<팀장채널>"
+destination_channel: "팀원 채널"   # 로그 표시용 이름. 실제 대상은 MM_DEST_CHANNEL_ID(Secrets/.env)
+allowed_senders:
+  - nh77.jang                 # 장나현(교육프로)
+  - sumin604.heo              # 허수민(교육프로)
+  - hslee0912                 # 이현석(컨설턴트)
+  - wonby1n                   # 조하원[대전_1,2반_AI]실습코치
+  - audguscjf                 # 본인(명현철)
+poll_overlap_seconds: 5
